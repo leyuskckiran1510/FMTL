@@ -10,7 +10,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/leyuskckiran1510/FMTL">
-    <!--<img src="images/logo.png" alt="Logo" width="80" height="80">-->
+    <img src="ExtensionFireFox/icon.png" alt="Logo" width="80" height="80">
   </a>
 
   <h1 align="center">FMTL</h1>
@@ -21,7 +21,7 @@
     <a href="https://github.com/leyuskckiran1510/FMTL"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://youtu.be/wBP-cz_0-wg">View Demo</a>
+    <a href="https://youtu.be/unknown">View Demo</a>
     ·
     <a href="https://github.com/leyuskckiran1510/FMTL/issues">Report Bug</a>
     ·

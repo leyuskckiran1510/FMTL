@@ -1,18 +1,35 @@
-let allowed = [
+let allowed_words = [
     "duckduckgo.com",
     "google.com",
-    "bing.com",
-    "chatgpt.com",
+    "openai",
     "stackoverflow.com",
-
-
+    "github.com",
+    "ycombinator.com",
+    "reddit.com/r/programming",
+    "codecademy.com",
+    "freecodecamp.org",
+    "coursera.org",
+    "edx.org",
+    "udemy.com/",
+    "khanacademy.org",
+    "about:blank",
+    "moz-extension"
     ]
 
+let check = (url) => {
+    for (let i = 0; i < allowed_words.length; i++) {
+        if (url.includes(allowed_words[i])) return false
+    }
+    return true
+}
 
-browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-    if (changeInfo.status === 'complete' && tab.url.startsWith('https://www.youtube.com')) {
-        browser.tabs.executeScript({
-            code: `document.body.innerHTML = "<h1 style='text-align: center; font-size: 100px;'>Today's Challange`
-        });
+browser.webNavigation.onBeforeNavigate.addListener((details) => {
+    if (details.url == "browser://newtab/") {
+        return
+    }
+    if (check(details.url)) {
+        browser.tabs.update(details.tabId, {
+            url: "index.html"
+        })
     }
 });
