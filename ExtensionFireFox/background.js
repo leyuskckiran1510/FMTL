@@ -12,7 +12,8 @@ const allowed = [
     "edx.org",
     "udemy.com/",
     "khanacademy.org",
-    "about:blank"]
+    "about:blank",
+    "moz-extension"]
 let defaults = allowed.map((x) => {
     dic = {
         domain_name: x,

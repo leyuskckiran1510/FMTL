@@ -22,5 +22,12 @@
         "default_icon": "icon.png",
         "default_title": "FMTL",
         "default_popup": "index.html"
+    },
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "fmtl@fmtl.learn",
+            "strict_min_version": "42.0"
+        }
     }
+
 }
