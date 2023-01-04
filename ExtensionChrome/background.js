@@ -12,17 +12,24 @@ const allowed = [
     "edx.org",
     "udemy.com/",
     "khanacademy.org",
-    "about:blank"
-    ]
+    "about:blank"]
+let defaults = allowed.map((x) => {
+    dic = {
+        domain_name: x,
+        status: true,
+        default: true
+    }
+    return dic
+})
 let allowed_words = []
 let complete = 0
 
 //loading fix datas to storage in the begining
 chrome.runtime.onInstalled.addListener(async() => {
     chrome.storage.sync.set({
-        "allow": `${allowed.join(',')}`,
-        "done": 0
+        "domains": JSON.stringify(defaults)
     })
+    console.log(defaults)
     change()
     background(1)
 })
@@ -31,8 +38,8 @@ let change = () => {
     chrome.storage.sync.get((res) => {
         //allowed_words = allowed.map((x) => x) //creating copy not pointer
         if (Object.keys(res).length == 0) return
-        if (Object.keys(res).includes('allow')) {
-            allowed_words = res.allow.split(',')
+        if (Object.keys(res).includes('domains')) {
+            allowed_words = JSON.parse(res.domains).map((x) => x.status ? x.domain_name : '=0-=0==0-0')
                 //console.log(allowed_words, "from storage")
         }
         if (Object.keys(res).includes('done')) {
@@ -44,7 +51,6 @@ let change = () => {
 
 let background = (run) => {
     chrome.webNavigation.onBeforeNavigate.addListener((details) => {
-        console.log(run, complete, "task Complete?")
         if (complete) return
         if (details.url == "chrome://newtab/") {
             return
@@ -59,9 +65,8 @@ let background = (run) => {
 
 
 chrome.storage.onChanged.addListener((changes, area) => {
-    if (area === 'sync') { // && changes.options ? .allow) {
-        console.log(changes, "Value changes")
-        change()
+    if (area === 'sync') {
+        allowed_words = JSON.parse(changes.domains.newValue).map((x) => x.status ? x.domain_name : '=0-=0==0-0')
     }
 })
 
